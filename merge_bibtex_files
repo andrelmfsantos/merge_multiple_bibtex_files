@@ -1,0 +1,39 @@
+######################################################
+# Title:  "Merge and Export Multiple BIBTEX format"  #
+# Author: "Andre Santos" | andrelmfsantos@gmail.com  #
+# Date:   "2020/04/08"                               #
+######################################################
+
+#----------------------------------------------------------------------------------------------#
+# Commands to indacate computer folder:                                                        #
+# getwd()                                       # Which directory R is pointing to             #
+# list.files()                                  # Which files are contained in the directory   #
+# setwd("C:/Users/andre/Downloads/bibtex_2019") # Set the directory on the computer            #
+#----------------------------------------------------------------------------------------------#
+
+# Package for uploaing, compiling and exporting in ".bib" or ".ris" extension
+if (!require(revtools)) install.packages("revtools")    # install package, if necessary
+library(revtools)                                       # load the package
+
+# Reading files from computer
+# - Obs: "return_df = FALSE" keeps the format that the data are stored in your computer.
+b001 <- read_bibliography("Bus2019Ar01.bib", return_df = FALSE)
+b002 <- read_bibliography("Bus2019Ar02.bib", return_df = FALSE)
+b003 <- read_bibliography("Bus2019Ar03.bib", return_df = FALSE)
+b004 <- read_bibliography("Bus2019Ar04.bib", return_df = FALSE)
+b005 <- read_bibliography("Bus2019Ar05.bib", return_df = FALSE)
+b006 <- read_bibliography("Bus2019Ar06.bib", return_df = FALSE)
+b007 <- read_bibliography("Bus2019Ar07.bib", return_df = FALSE)
+b008 <- read_bibliography("Bus2019Ar08.bib", return_df = FALSE)
+b009 <- read_bibliography("Bus2019Ar09.bib", return_df = FALSE)
+b010 <- read_bibliography("Bus2019Ar10.bib", return_df = FALSE)
+
+# Merge multiple ".bib" files
+merge_files <- c(b001, b002, b003, b004, b005, b006, b007, b008, b009, b010)
+
+# Export a subset of entries as a new file
+write_bibliography(merge_files, filename = "ExportBibTexFile.bib", format = "bib")
+
+# References
+# - https://revtools.net/data.html
+# - https://cran.r-project.org/web/packages/revtools/revtools.pdf
